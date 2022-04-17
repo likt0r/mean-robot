@@ -1,4 +1,8 @@
+from __future__ import division
+import time
+
 import Adafruit_PCA9685
+
 board_address = 0x40
 pwm_freq = 50
 
@@ -29,6 +33,8 @@ print('Moving servo on channel 0, press Ctrl-C to quit...')
 while True:
     # Move servo on channel O between extremes.
     pwm.set_pwm(0, 0, servo_min)
+    pwm.set_pwm(1, 0, servo_min)
     time.sleep(1)
     pwm.set_pwm(0, 0, servo_max)
+    pwm.set_pwm(1, 0, servo_min)
     time.sleep(1)
