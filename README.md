@@ -1,6 +1,11 @@
 # mean-robot
+# Setup PI 
 
-# install gstreamer
+## install base packages 
+```bash
+sudo apt-get install git -y
+```
+## install gstreamer
 ```bash
 git clone https://github.com/jacksonliam/mjpg-streamer.git
 
@@ -39,4 +44,19 @@ i2cdetect -y 1
 # 70: 70 -- -- -- -- -- -- --
 
 sudo pip install Adafruit-PCA9685
+```
+
+# clone mean robot repository
+
+## install robot-api
+```bash
+pip install fastapi
+pip install "uvicorn[standar]"
+
+```
+## start dev 
+
+```bash
+# api (file) app(instance of fastAPI class)
+uvicorn api:app --reload
 ```
