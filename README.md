@@ -4,6 +4,8 @@
 ## install base packages 
 ```bash
 sudo apt-get install git -y
+sudo apt-get install python3 python3-pip uvicorn
+pip3 install fastapi rpi.gpio
 ```
 ## install gstreamer
 ```bash
