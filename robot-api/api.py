@@ -1,14 +1,17 @@
 from fastapi import BackgroundTasks, FastAPI
 import time
-from body_runner import BodyRunner 
+import asyncio
+from body_runner import BodyRunner
 app = FastAPI()
 
-# runner = BodyRunner()
+runner = BodyRunner()
 
-# @app.on_event('startup')
-# async def app_startup():
-#     asyncio.create_task(runner.run_main())
+
+@app.on_event('startup')
+async def app_startup():
+    asyncio.create_task(runner.run_main())
+
 
 @app.get("/")
 async def root():
-    return {"message": "hello"}
+    return {"message": runner.value}
