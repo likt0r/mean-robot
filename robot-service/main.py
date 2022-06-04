@@ -4,6 +4,11 @@ import threading
 from control_loop import loop
 from server import loop as server_loop
 # from socket import socket_listener
+from store import ThreadSafeStore
+
+# init store
+store = ThreadSafeStore(
+    config_filepath='/home/pi/mean-robot/robot-service/store_init.yaml')
 
 
 # Created the Threads

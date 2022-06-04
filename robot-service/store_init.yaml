@@ -1,0 +1,196 @@
+actuators:
+  # head_yaw:
+  #   type: servo
+  #   id: 0
+  #   target_position: 0 
+  #   current_position: 0
+  #   speed: 1
+  #   pulse_min: 150
+  #   pulse_max: 600
+  # head_pitch:
+  #   id: 1
+  #   type: servo
+  #   target_position: 0
+  #   current_position: 0
+  #   speed: 1
+  #   pulse_min: 150
+  #   pulse_max: 600
+  m11:
+    id: 0
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 0
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m12:
+    id: 1
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 0
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m21:
+    id: 2
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m22:
+    id: 3
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m31:
+    id: 4
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m32:
+    id: 5
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m41:
+    id: 6
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m42:
+    id: 7
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m51:
+    id: 8
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m52:
+    id: 9
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second  
+  m61:
+    id: 10
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m62:
+    id: 11
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m71:
+    id: 12
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m72:
+    id: 13
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m81:
+    id: 14
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second
+  m82:
+    id: 15
+    type: servo
+    speed: 0.1
+    pulse_min: 0.5
+    pulse_max: 2.5
+    angle_min: 0 
+    angle_max: 180
+    angle_start: 90
+    step_resolution: 4096  # 12bit
+    angle_max_velocity: 600  # 600° per second    
+sensors:
+  cpu_temp:
+    value: 0

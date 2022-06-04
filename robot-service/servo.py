@@ -14,38 +14,40 @@ class Servo:
     def __init__(self,
                  id,
                  pwm_api,
-                 min_impulse_ms=1,
-                 max_impulse_ms=2,
-                 min_angle=0,
-                 start_angle=45,
-                 max_angle=90,
+                 pulse_min=1,
+                 pulse_max=2,
+                 angle_min=0,
+                 angle_start=45,
+                 angle_max=90,
                  pwm_frequency=50,
                  step_resolution=4096,  # 12bit
-                 max_angle_velocity=600,  # 600° per second
+                 angle_max_velocity=600,  # 600° per second
                  loop_frequency=100,
                  ):
         pwm_step = 1 / pwm_frequency / step_resolution * 1000  # step in ms
         self.id = id
         self.pwm_api = pwm_api
 
-        self.steps_min = math.ceil(min_impulse_ms / pwm_step)
-        self.steps_max = math.floor(max_impulse_ms / pwm_step)
+        self.steps_min = math.ceil(pulse_min / pwm_step)
+        self.steps_max = math.floor(pulse_max / pwm_step)
         self.steps_center = round(
             self.steps_max - self.steps_min / 2) + self.steps_min
-        self.min_angle = min_angle
-        self.max_angle = max_angle
-        self.start_angle = start_angle
+        self.angle_min = angle_min
+        self.angle_max = angle_max
+        self.angle_start = angle_start
         self.pwm_frequency = 50
         self.angle_factor = (self.steps_max-self.steps_min) / \
-            (max_angle-min_angle)
+            (angle_max-angle_min)
 
         self.relative_factor = (self.steps_max-self.steps_min) / 2
-        self.steps_start = round(start_angle * self.angle_factor)
+        self.steps_start = round(angle_start * self.angle_factor)
 
         self.max_steps_change = round(
-            max_angle_velocity/loop_frequency * self.angle_factor)
+            angle_max_velocity/loop_frequency * self.angle_factor)
         # set start position
         self.current = self.steps_min
+        self.target = self.steps_min
+        self.set_velocity(0.1)
         self.pwm_api.set_pwm(self.id, 0, self.steps_start)
 
     def set_velocity(self, velocity):
@@ -55,8 +57,8 @@ class Servo:
             velocity, self.current_loop_change))
 
     def set_angle(self, angle):
-        tmp = min(max(angle, self.min_angle),
-                  self.max_angle) - self.min_angle
+        tmp = min(max(angle, self.angle_min),
+                  self.angle_max) - self.angle_min
         self.target = round(tmp * self.angle_factor + self.steps_min)
         print(self.target)
         #self.pwm_api.set_pwm(self.id, 0, self.current)
@@ -87,9 +89,3 @@ class Servo:
             (min(abs(self.target-self.current), self.current_loop_change))
         # print("After current {}  vs  target {}".format(self.current, self.target))
         self.pwm_api.set_pwm(self.id, 0, round(self.current))
-
-    def get_store_dict(): 
-        return {
-            
-        }
-    

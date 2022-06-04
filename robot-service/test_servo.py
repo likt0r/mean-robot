@@ -3,7 +3,7 @@ import time
 import Adafruit_PCA9685
 from logging import getLogger
 import math
-from servo_velocity_control import Servo
+from servo import Servo
 # Operating Voltage: 4.8V to 6V (Typically 5V)
 # Stall Torque: 1.8 kg/cm (4.8V)
 # Max Stall Torque: 2.2 kg/cm (6V)
@@ -41,8 +41,8 @@ print(SERVO_MAX)
 # Set frequency to 60hz, good for servos.
 pwm.set_pwm_freq(PWM_FREQ)  # 50 hz
 
-servo1 = Servo(0, pwm, min_impulse_ms=0.5, max_impulse_ms=2.5,
-               min_angle=0, max_angle=180, start_angle=90)
+servo1 = Servo(0, pwm, pulse_min=0.5, pulse_max=2.5,
+               angle_min=0, angle_max=180, angle_start=90)
 
 
 def micros():

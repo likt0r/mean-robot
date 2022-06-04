@@ -1,10 +1,12 @@
 from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer
 from store import ThreadSafeStore
 import logging
+import time
 
 
 def loop():
     store = ThreadSafeStore()
+    time.sleep(4)  # wait till sensor loop is initialized
 
     def get(path):
         return store.get(path)
