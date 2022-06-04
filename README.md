@@ -78,3 +78,9 @@ uvicorn api:app --reload
 }
 
 ```
+# usefull links 
+* PCA9685 http://wiki.sunfounder.cc/index.php?title=PCA9685_16_Channel_12_Bit_PWM_Servo_Driver
+* PCA9685 connection to Pi https://bluexmas.tistory.com/532#
+* Pi 3B Pinout https://www.etechnophiles.com/raspberry-pi-3-gpio-pinout-pin-diagram-and-specs-in-detail-model-b/
+* MG90s Servomotor Datasheet https://components101.com/motors/mg90s-metal-gear-servo-motor
+* Use pymon for development https://github.com/kevinjosethomas/py-mon
