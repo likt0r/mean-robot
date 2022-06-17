@@ -1,4 +1,5 @@
 import math
+from enum import Enum
 
 
 def sign(x):
@@ -89,3 +90,13 @@ class Servo:
             (min(abs(self.target-self.current), self.current_loop_change))
         # print("After current {}  vs  target {}".format(self.current, self.target))
         self.pwm_api.set_pwm(self.id, 0, round(self.current))
+
+
+methods_dict = {
+    'set_angle': 'set_angle',
+    'set_value': 'set_value',
+    'set_velocity': 'set_velocity',
+    'max': 'max',
+    'min': 'min',
+    'center': 'center'
+}

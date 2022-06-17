@@ -64,19 +64,24 @@ apt-get install uvicorn
 ## start dev 
 
 ```bash
-# api (file) app(instance of fastAPI class)
-uvicorn api:app --reload
+# main (file) app(instance of fastAPI class)
+uvicorn main:app --reload
 ```
 
 
 # robot-service socket api 
 ```json
 {
-    "command": "[get,set]",
+    "command": "[get,set,method]",
     "path": "path in body object",
     "value": ["int","string","float"]
 }
 
+```
+
+# method_queue item 
+```json
+["path", "method_name", param_1, ..., param_n]
 ```
 # usefull links 
 * PCA9685 http://wiki.sunfounder.cc/index.php?title=PCA9685_16_Channel_12_Bit_PWM_Servo_Driver

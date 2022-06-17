@@ -7,7 +7,7 @@ from servo import Servo
 
 # Set frequency to 60hz, good for servos.
 PWM_FREQUENCY = 60
-LOOP_FREQUENCY = 80
+LOOP_FREQUENCY = 60
 logger = getLogger()
 
 board_address = 0x40
@@ -32,42 +32,50 @@ def micros():
 sleep_time = 0
 
 
-def loop():
-    actuators = []
-    store = ThreadSafeStore()
-    info = store.get("actuators")
-    logger.info("Initialize actuators")
-    for key, value in info.items():
-        actuators.append((key, Servo(value["id"],
-                                     pwm,
-                                     pulse_min=value["pulse_min"],
-                                     pulse_max=value["pulse_max"],
-                                     angle_min=value["angle_min"],
-                                     angle_start=value["angle_start"],
-                                     angle_max=value["angle_max"],
-                                     step_resolution=value["step_resolution"],
-                                     angle_max_velocity=value["angle_max_velocity"],
-                                     pwm_frequency=PWM_FREQUENCY,
-                                     loop_frequency=LOOP_FREQUENCY,
-                                     )))
+def create_loop(methods_queue):
+    def loop():
+        actuators = {}
+        store = ThreadSafeStore()
+        info = store.get("actuators")
+        logger.info("Initialize actuators")
+        for key, value in info.items():
+            actuators[key] = Servo(value["id"],
+                                   pwm,
+                                   pulse_min=value["pulse_min"],
+                                   pulse_max=value["pulse_max"],
+                                   angle_min=value["angle_min"],
+                                   angle_start=value["angle_start"],
+                                   angle_max=value["angle_max"],
+                                   step_resolution=value["step_resolution"],
+                                   angle_max_velocity=value["angle_max_velocity"],
+                                   pwm_frequency=PWM_FREQUENCY,
+                                   loop_frequency=LOOP_FREQUENCY,
+                                   )
 
-    logger.info("Start sensor motor loop")
+        logger.info("Start sensor motor loop")
 
-    while True:
-        # Move servo on channel O between extremes.
-        t_start = micros()
-        # do actuators
+        while True:
+            # Move servo on channel O between extremes.
+            t_start = micros()
+            # do actuators
 
-        for (key, servo) in actuators:
-            servo.loop()
-        # for i in range(0, 15):
-        #     pwm.set_pwm(i, 0, 300)
-        # do sensors
-        # sensors = store.get("sensors")
-        t_end = micros()
-        sleep_time = (loop_freq-(t_end-t_start))
-        if(sleep_time < 0):
-            # loop to long don't sleep
-            logger.warn("Missed Frame by {}".format(sleep_time/1000000))
-            continue
-        time.sleep((loop_freq-(t_end-t_start))/1000000)
+            while not methods_queue.empty():
+                item = methods_queue.get()
+                method = getattr(actuators[item[0]], item[1])
+                method(item[2])
+
+            for servo in actuators.values():
+                servo.loop()
+            # for i in range(0, 15):
+            #     pwm.set_pwm(i, 0, 300)
+            # do sensors
+            # sensors = store.get("sensors")
+            t_end = micros()
+            sleep_time = (loop_freq-(t_end-t_start))
+            if(sleep_time < 0):
+                # loop to long don't sleep
+                logger.warn("Missed Frame by {}".format(sleep_time/1000000))
+                continue
+            time.sleep((loop_freq-(t_end-t_start))/1000000)
+
+    return loop
